@@ -1,8 +1,8 @@
 from snautomata.SnMente import SnMente
-from snautomata.SnOido import SnOidoOffline
+from snautomata.SnOido import SnOidoGoogle
 from snautomata.SnBoca import SnBocaWindows
 
-oido=SnOidoOffline()
+oido=SnOidoGoogle()
 boca=SnBocaWindows()
 mente=SnMente(oido,boca)
 
