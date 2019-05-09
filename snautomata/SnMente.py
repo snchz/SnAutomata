@@ -1,22 +1,22 @@
-import SnOido, SnBoca
-from SnOido import SnOidoTerminal
-from SnBoca import SnBocaEspeak
+from snautomata.SnOido import SnOidoGoogle
+from snautomata.SnBoca import SnBocaWindows
+import webbrowser
 
 #CLASE MENTE
 class SnMente(object):
 	def __init__(self, oido, boca):
 		self.oido=oido
 		self.boca=boca
-		self.despertar()
-		self.bucle()
-	def bucle(self):
+	def atender(self):
 		while self.despierto==1:
-			texto=self.oido.escuchar()
-			if texto=="Hola":
+			texto=self.oido.escuchar().upper()
+			if "HOLA" in texto:
 				self.boca.decir("Hola, qué tal?")
-			elif texto=="Vete a dormir":
+			elif "A DORMIR" in texto:
 				self.boca.decir("OK")
 				self.dormir()
+			elif "ABRIR" in texto and "." in texto:
+				webbrowser.open_new_tab(texto.replace("ABRIR ",""))
 	def dormir(self):
 		self.despierto=0
 		self.boca.decir("Me voy a dormir. Buenas noches...")
@@ -24,6 +24,3 @@ class SnMente(object):
 		self.despierto=1
 		self.boca.decir("He despertado. Buenos días...")
 
-oido=SnOidoTerminal()
-boca=SnBocaEspeak()
-mente=SnMente(oido,boca)
